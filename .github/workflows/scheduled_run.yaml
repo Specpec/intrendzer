@@ -1,0 +1,25 @@
+name: Scheduled Task
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  run-scheduled-task:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run scheduled script
+        run: |
+          python Ticketer.py
